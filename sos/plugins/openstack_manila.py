@@ -51,12 +51,8 @@ class OpenStackManila(Plugin):
         )
 
     def postproc(self):
-        protect_keys = [
-            "nova_admin_password",  "rabbit_password",  "qpid_password",
-            "password", "netapp_nas_password", "cinder_admin_password",
-            "neutron_admin_password", "service_instance_password",
-            "transport_url"
-        ]
+        protect_keys = [".*password.*", "transport_url",
+                        "hdfs_ssh_pw", "maprfs_ssh_pw"]
         connection_keys = ["connection", "sql_connection"]
 
         self.apply_regex_sub(
